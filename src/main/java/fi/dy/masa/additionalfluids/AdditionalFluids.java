@@ -65,7 +65,7 @@ public class AdditionalFluids
 		}
 		fluid.setRarity(rarity);
 		//fluid.setUnlocalizedName(fluidName + ".still");
-		fluid.setUnlocalizedName(fluidName);
+		fluid.setUnlocalizedName(fluidName + ".name");
 
 		return fluid;
 	}
