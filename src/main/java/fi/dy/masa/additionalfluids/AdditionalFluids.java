@@ -3,7 +3,6 @@ package fi.dy.masa.additionalfluids;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidContainerRegistry.FluidContainerData;
@@ -11,15 +10,11 @@ import net.minecraftforge.fluids.FluidRegistry;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
 import fi.dy.masa.additionalfluids.block.fluid.AFBlockFluidBase;
 import fi.dy.masa.additionalfluids.block.fluid.BlockFluidMilk;
-import fi.dy.masa.additionalfluids.event.TextureEvents;
-import fi.dy.masa.additionalfluids.proxy.IProxy;
 import fi.dy.masa.additionalfluids.reference.Reference;
 
 
@@ -29,9 +24,6 @@ public class AdditionalFluids
 	@Instance(Reference.MOD_ID)
 	public static AdditionalFluids instance;
 
-	@SidedProxy(clientSide = Reference.PROXY_CLASS_CLIENT, serverSide = Reference.PROXY_CLASS_SERVER)
-	public static IProxy proxy;
-
 	public AFBlockFluidBase blockFluidMilk;
 	public Fluid fluidMilk;
 
@@ -39,15 +31,10 @@ public class AdditionalFluids
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		fluidMilk = registerFluid("milk", 1050, EnumRarity.common);
-		blockFluidMilk = new BlockFluidMilk();
+		blockFluidMilk = new BlockFluidMilk(fluidMilk);
 		GameRegistry.registerBlock(blockFluidMilk, blockFluidMilk.getUnlocalizedName());
 		//RegistryUtils.overwriteEntry(Item.itemRegistry, "minecraft:milk_bucket", Items.milk_bucket);
 		FluidContainerRegistry.registerFluidContainer(new FluidContainerData(FluidRegistry.getFluidStack("milk", FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(Items.milk_bucket), new ItemStack(Items.bucket)));
-
-		if (event.getSide() == Side.CLIENT)
-		{
-			MinecraftForge.EVENT_BUS.register(new TextureEvents());
-		}
 	}
 
 	@EventHandler

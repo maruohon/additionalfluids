@@ -6,25 +6,28 @@ import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.BlockFluidClassic;
+import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 
 public class AFBlockFluidBase extends BlockFluidClassic
 {
-	protected String fluidName;
+	protected Fluid fluid;
+	protected String blockName;
 
-	public AFBlockFluidBase(String fluidName)
+	public AFBlockFluidBase(String blockName, Fluid fluid)
 	{
-		this(fluidName, Material.water);
+		this(blockName, fluid, Material.water);
 	}
 
-	public AFBlockFluidBase(String fluidName, Material material)
+	public AFBlockFluidBase(String blockName, Fluid fluid, Material material)
 	{
-		super(FluidRegistry.getFluid(fluidName), material);
+		super(FluidRegistry.getFluid(blockName), material);
 		//verifyIsFluid(fluidName);
-		this.setBlockName(fluidName);
+		this.setBlockName(blockName);
 		this.setHardness(100.0f);
 		this.setLightOpacity(3);
-		this.fluidName = fluidName;
+		this.blockName = blockName;
+		this.fluid = fluid;
 		this.setCreativeTab(CreativeTabs.tabMisc);
 	}
 /*
@@ -57,7 +60,7 @@ public class AFBlockFluidBase extends BlockFluidClassic
 	@Override
 	public String getUnlocalizedName()
 	{
-		return "fluid." + this.fluidName;
+		return "fluid." + this.blockName;
 	}
 
 	protected void checkCanStay(World world, int x, int y, int z, Random rand)
