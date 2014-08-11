@@ -1,0 +1,16 @@
+[
+{
+  "modid": "additionalfluids",
+  "name": "Additional Fluids",
+  "description": "A small derpy mod that adds some fluids.",
+  "version": "${mod_version}",
+  "mcversion": "${minecraft_version}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["masa"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
